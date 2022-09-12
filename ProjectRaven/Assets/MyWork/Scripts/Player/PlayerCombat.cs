@@ -8,12 +8,17 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Attack();
+        Attack();
     }
 
     void Attack()
     {
-        animator.Play("Attack");
+        if (Input.GetMouseButtonDown(0))            // stop character from moving when animation is active
+            animator.SetTrigger("Attack");
+
+        // detect collision
+
+        //damage layers with layermask
     }
+    
 }

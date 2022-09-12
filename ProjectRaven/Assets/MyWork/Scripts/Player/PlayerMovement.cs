@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public new Transform camera;
     public Transform groundcheck;
+    public Animator animator;
     [Space]
 
     public LayerMask groundMask;
@@ -26,6 +27,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
 
+
+
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {
@@ -68,9 +75,9 @@ public class PlayerMovement : MonoBehaviour
     void AnimateRun(Vector3 direction)
     {
         if (direction != Vector3.zero)
-            GetComponentInChildren<Animator>().Play("Run");
+            animator.SetBool("IsRunning", true);
         else
-            GetComponentInChildren<Animator>().Play("Idle");
+            animator.SetBool("IsRunning", false);
     }
 
     void Move(Vector3 direction)
@@ -103,4 +110,6 @@ Because it seems easier and more convinient to use the unity built in controller
 
 
 */
+
+
 
