@@ -68,9 +68,9 @@ public class PlayerMovement : MonoBehaviour
     void AnimateRun(Vector3 direction)
     {
         if (direction != Vector3.zero)
-            GetComponent<Animator>().Play("Run");
+            GetComponentInChildren<Animator>().Play("Run");
         else
-            GetComponent<Animator>().Play("Idle");
+            GetComponentInChildren<Animator>().Play("Idle");
     }
 
     void Move(Vector3 direction)
