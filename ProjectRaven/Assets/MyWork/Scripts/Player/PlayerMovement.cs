@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public new Transform camera;
-    public Transform groundcheck;
-    public Animator animator;
+    [SerializeField] CharacterController controller;
+    [SerializeField] new Transform camera;
+    [SerializeField] Transform groundcheck;
+    [SerializeField] Animator animator;
     [Space]
 
-    public LayerMask groundMask;
+    [SerializeField] LayerMask groundMask;
     [Space]
 
-    float rotationSpeedVelocity;
+    [SerializeField] float rotationSpeedVelocity;
     [Space]
 
-    public float rotationSpeed = 0.1f;
-    public float speed = 6f;
-    public float gravity = -9.81f;
-    public float groundDistance = 0.4f;
+    [SerializeField] float rotationSpeed = 0.1f;
+    [SerializeField] float speed = 6f;
+    [SerializeField] float gravity = -9.81f;
+    [SerializeField] float groundDistance = 0.4f;
     [Space]
 
     bool isGrounded;
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        controller = GetComponentInChildren<CharacterController>();
     }
 
     void Update()
@@ -43,8 +44,6 @@ public class PlayerMovement : MonoBehaviour
         AnimateRun(direction);
 
         Move(direction);
-
-
 
     }
 
