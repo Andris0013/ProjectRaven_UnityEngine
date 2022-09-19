@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [SerializeField] new Transform camera;
     [SerializeField] Transform groundcheck;
     [SerializeField] Animator animator;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] LayerMask enemyLayer;
+
     [Space]
 
     [SerializeField] LayerMask groundMask;
@@ -20,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 6f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float groundDistance = 0.4f;
+    [SerializeField] float attackRange = 0.5f;
+
     [Space]
 
     bool isGrounded;
@@ -38,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Gravity();
+
+        Attack();
 
         Vector3 direction = GetDirection();
 
@@ -71,6 +78,31 @@ public class PlayerMovement : MonoBehaviour
         return direction;
     }
 
+    void Attack()
+    {
+        //attack animation
+        if (Input.GetMouseButtonDown(0))
+            animator.SetTrigger("Attack");
+
+        //detect collision
+        Collider[] hitEnemy = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
+
+        //damage detected enemies
+        foreach (Collider enemy in hitEnemy)
+        {
+
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+
     void AnimateRun(Vector3 direction)
     {
         if (direction != Vector3.zero)
@@ -92,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+
 
 }
 
