@@ -10,21 +10,18 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
-
-    [Space]
-
     [SerializeField] LayerMask groundMask;
     [Space]
 
     [SerializeField] float rotationSpeedVelocity;
-    [Space]
-
     [SerializeField] float rotationSpeed = 0.1f;
     [SerializeField] float speed = 6f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] float attackRange = 0.5f;
-
+    [SerializeField] float damage = 100f;
+    [SerializeField] float maxHealth = 1f;
+    float currentHealth;
     [Space]
 
     bool isGrounded;
@@ -34,10 +31,12 @@ public class PlayerControls : MonoBehaviour
 
 
 
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         controller = GetComponentInChildren<CharacterController>();
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -70,6 +69,23 @@ public class PlayerControls : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+            Die();
+
+    }
+
+    void Die()
+    {
+        Debug.Log("Dead");
+        // play animation
+
+        // GameOver
+    }
+
     Vector3 GetDirection()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -80,18 +96,16 @@ public class PlayerControls : MonoBehaviour
 
     void Attack()
     {
-        //attack animation
         if (Input.GetMouseButtonDown(0))
             animator.SetTrigger("Attack");
 
-        //detect collision
         Collider[] hitEnemy = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
-        //damage detected enemies
         foreach (Collider enemy in hitEnemy)
         {
-
+            enemy.GetComponentInChildren<EnemyMovement>().TakeDamage(damage);
         }
+
     }
 
     void OnDrawGizmosSelected()
@@ -101,7 +115,6 @@ public class PlayerControls : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
 
     void AnimateRun(Vector3 direction)
     {
@@ -132,15 +145,12 @@ public class PlayerControls : MonoBehaviour
 
 // Comments
 /*
-I decided to use GetAxisRaw, because I would like to use the WASD controls with the mouse or a Controller maybe in the future. 
 
-First problem is that the character won't use local directions instead of world space directions to move, so the third person control feels off in a 3D space:
-- Quaternion targetRotation = Quaternion.LookRotation(direction + cam.eulerAngles.y); = error so I use stg different that I found on youtube
-- transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+Wanted all damage to be instant kill but there is the option layed out to implement more health, less damaga and take hit animations.
 
-Because it seems easier and more convinient to use the unity built in controller and correct it with scripts I decided to use it. That's why I use the following:
-- controller.Move(direction * speed * Time.deltaTime);
+Also tried to make the enemy replacable for graphics if I want to implement actual enemies not just spheres in the futur
 
+Decided to try to learn new things that make movement and camera movement easier. (Main reason is that my character was always moving towards global forward even when I looked the oder way. This seemed to be the easiest solution.
 
 */
 
