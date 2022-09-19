@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    // Methods
+    // Support
     void Gravity()
     {
         isGrounded = Physics.CheckSphere(groundcheck.position, groundDistance, groundMask);
