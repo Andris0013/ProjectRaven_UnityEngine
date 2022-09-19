@@ -98,7 +98,7 @@ MonoBehaviour:
   speed: 6
   gravity: -9.81
   groundDistance: 0.4
-  attackRange: 0.5
+  attackRange: 0.3
   damage: 100
   maxHealth: 1
 --- !u!1 &6712921893545173399
@@ -564,11 +564,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5830324275937255869, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Size.y
-      value: 76
+      value: 58.8
       objectReference: {fileID: 0}
     - target: {fileID: 5830324275937255869, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Size.z
       value: 14.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830324275937255869, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_Center.y
+      value: 20.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
