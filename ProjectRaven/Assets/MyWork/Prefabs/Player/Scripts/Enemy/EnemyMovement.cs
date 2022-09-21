@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float lookRadius = 10f;
     [SerializeField] float maxHealth = 1;
     [SerializeField] float attackRange;
-    [SerializeField] float enemyDamage = 0f;
+    [SerializeField] float enemyDamage = 100f;
 
     float currentHealth;
 
@@ -82,7 +82,7 @@ public class EnemyMovement : MonoBehaviour
         particleSystem.Play();
 
         forDeath.isKinematic = false;
-        GetComponentInChildren<BoxCollider>().enabled = false;
+        GetComponentInChildren<SphereCollider>().enabled = false;
         this.enabled = false;
     }
 
