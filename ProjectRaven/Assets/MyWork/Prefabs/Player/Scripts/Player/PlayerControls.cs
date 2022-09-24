@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] GameObject GameOver;
+    [SerializeField] GameObject[] enemies;
     [Space]
 
     [SerializeField] float rotationSpeedVelocity;
@@ -37,6 +40,8 @@ public class PlayerControls : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         controller = GetComponentInChildren<CharacterController>();
         currentHealth = maxHealth;
+        GameOver.SetActive(false);
+
     }
 
     void Update()
@@ -81,9 +86,14 @@ public class PlayerControls : MonoBehaviour
     void Die()
     {
         Debug.Log("Dead");
-        // play animation
 
-        // GameOver
+        foreach (GameObject enemy in enemies)
+            enemy.SetActive(false);
+
+        animator.SetBool("IsDead", true);
+        
+        GameOver.SetActive(true);
+        GameOver.GetComponentInChildren<GameOverScript>().RestartGame();
     }
 
     Vector3 GetDirection()
@@ -138,7 +148,7 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-
+    
 
 }
 

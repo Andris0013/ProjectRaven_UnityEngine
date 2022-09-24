@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float maxHealth = 1;
     [SerializeField] float attackRange;
     [SerializeField] float enemyDamage = 100f;
+    
 
     float currentHealth;
 
@@ -65,6 +66,7 @@ public class EnemyMovement : MonoBehaviour
     void ChasePlayer()
     {
         agent.SetDestination(Player.position);
+        
 
         // look at player if needed
     }
