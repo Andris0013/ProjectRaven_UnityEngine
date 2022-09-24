@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -37,6 +34,7 @@ public class PlayerControls : MonoBehaviour
 
     void Start()
     {
+        this.enabled = true;
         animator = GetComponentInChildren<Animator>();
         controller = GetComponentInChildren<CharacterController>();
         currentHealth = maxHealth;
@@ -85,15 +83,15 @@ public class PlayerControls : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Dead");
-
         foreach (GameObject enemy in enemies)
             enemy.SetActive(false);
 
         animator.SetBool("IsDead", true);
         
         GameOver.SetActive(true);
-        GameOver.GetComponentInChildren<GameOverScript>().RestartGame();
+        camera.GetComponentInChildren<Cinemachine.CinemachineBrain>(enabled = false);
+
+        this.enabled = false;
     }
 
     Vector3 GetDirection()
@@ -146,10 +144,7 @@ public class PlayerControls : MonoBehaviour
             controller.Move(moveDirection.normalized * speed * Time.deltaTime);
         }
 
-    }
-
-    
-
+    } 
 }
 
 

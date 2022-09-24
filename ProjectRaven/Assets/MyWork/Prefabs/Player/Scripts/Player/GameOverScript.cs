@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverScript : MonoBehaviour
 {
+
+
     public void RestartGame()
     {
-        SceneManager.LoadScene("Scene 1");
+        SceneManager.LoadScene("GameScene1");
     }
 }

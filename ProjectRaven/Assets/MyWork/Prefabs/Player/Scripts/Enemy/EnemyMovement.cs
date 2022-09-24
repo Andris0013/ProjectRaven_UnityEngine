@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,6 +27,8 @@ public class EnemyMovement : MonoBehaviour
         forDeath.isKinematic = true;
         particleSystem = GetComponentInChildren<ParticleSystem>();
         particleSystem.Pause();
+        GetComponentInChildren<SphereCollider>().enabled = true;
+
     }
 
 
